@@ -27,7 +27,7 @@ public class Main {
         Block b = new Block('F');
 
 
-        m.insert_at_coords(0,0,b);
+        m.insert_at_coords(0,2,b);
 
         m.display_on_out();
 

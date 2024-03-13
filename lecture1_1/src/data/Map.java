@@ -49,16 +49,18 @@ public class Map {
     public void insert_at_coords(int x, int y, Block b){
         if(b != null){
             mappa[x][y] = b;
-            if(b.isFalls_with_gravity()){
-                while(x < mappa.length-1){
-                    swap(x,y);
-                    ++x;
-                }
-            }else{
-                swap(x,y);
-            }
-        }
+            int index = x;
+                while(index < mappa.length-1 && mappa[index][y].isFalls_with_gravity()) {
+                    if(mappa[index+1][y].isFall_through()) {
 
+                        swap(index, y);
+                        index++;
+                    }else{
+                        break;
+                    }
+                }
+        }
     }
+
 }
 
