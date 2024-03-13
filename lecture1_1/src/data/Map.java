@@ -50,10 +50,12 @@ public class Map {
         if(b != null){
             mappa[x][y] = b;
             if(b.isFalls_with_gravity()){
-                while(y == 0){
+                while(x < mappa.length-1){
                     swap(x,y);
-                    --y;
+                    ++x;
                 }
+            }else{
+                swap(x,y);
             }
         }
 
