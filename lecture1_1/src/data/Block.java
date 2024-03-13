@@ -9,7 +9,7 @@ public class Block {
 
 
     public Block() {
-        this.contenuto = '.';
+        this.contenuto = '*';
         this.falls_with_gravity = false;
         this.fall_through = true;
     }
