@@ -1,23 +1,29 @@
 package data;
 
+import java.util.Random;
+
 public class Map {
 
-    public final int x= 4, y = 4;
+    public final int x = 4;
+    public final int y = 4;
 
     private Block[][] mappa;
 
     public Map() {
         mappa = new Block[x][y];
-        for(int r = 0; r < x; ++r ) {
+        Random ran = new Random();
+        char blocco = '0';
+        for (int r = 0; r < x; ++r) {
             for (int c = 0; c < y; ++c) {
-                mappa[r][c] = new Block();
+                blocco = (char) (ran.nextInt(90-65) + 65);
+                mappa[r][c] = new Block(blocco);
             }
         }
     }
 
-    public void display_on_out(){
+    public void display_on_out() {
         System.out.println("---------------------//---------------------");
-        for(int r = 0; r < x; ++r ) {
+        for (int r = 0; r < x; ++r) {
             for (int c = 0; c < y; ++c) {
                 System.out.print(mappa[r][c].display() + " ");
             }
@@ -26,41 +32,38 @@ public class Map {
         System.out.println("---------------------//---------------------");
     }
 
-    public void change_cell(int x, int y){
-        mappa[x][y].setContenuto('A');
-    }
-
-    public void swap(int x, int y) {
-        if (!(x >= mappa.length || y >= mappa[0].length) && !(x < 0 || y < 0)) {
-            if (!(y == (mappa[0].length - 1))) { // Modificato mappa.length a mappa[0].length
-                char blocco = mappa[x][y].display();
-                mappa[x][y].setContenuto(mappa[x+1][y].display()); // Aggiunto il blocco successivo
-                mappa[x+1][y].setContenuto(blocco);
-                System.out.println("Blocco scambiato correttamente");
-            } else {
-                System.err.println("Impossibile scambiare i blocchi perché è stato selezionato il blocco più in basso");
-            }
+    public void change_cell(int x, int y) {
+        if (x >= 0 && x < this.x && y >= 0 && y < this.y) {
+            mappa[x][y] = new Block('A');
         } else {
             System.err.println("Errore nelle coordinate inserite!!!");
         }
     }
 
-
-    public void insert_at_coords(int x, int y, Block b){
-        if(b != null){
+    public void insert_at_coords(int x, int y, Block b) {
+        if (b != null && x >= 0 && x < this.x && y >= 0 && y < this.y) {
             mappa[x][y] = b;
-            int index = x;
-                while(index < mappa.length-1 && mappa[index][y].isFalls_with_gravity()) {
-                    if(mappa[index+1][y].isFall_through()) {
-
-                        swap(index, y);
-                        index++;
-                    }else{
-                        break;
-                    }
-                }
+            gravita(x, y);
+        } else {
+            System.err.println("Errore nelle coordinate o nel blocco inserito!!!");
         }
     }
 
-}
+    private void gravita(int x, int y) {
+        int index = x;
+        while (index < mappa.length - 1 && mappa[index][y].isFalls_with_gravity()) {
+            if (mappa[index + 1][y].isFall_through()) {
+                swap(index, y);
+                index++;
+            } else {
+                break;
+            }
+        }
+    }
 
+    private void swap(int x, int y) {
+        Block temp = mappa[x][y];
+        mappa[x][y] = mappa[x + 1][y];
+        mappa[x + 1][y] = temp;
+    }
+}

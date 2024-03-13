@@ -6,10 +6,8 @@ public class Block {
     private boolean falls_with_gravity;
     private boolean fall_through;
 
-
-
     public Block() {
-        this.contenuto = '*';
+        this.contenuto = '.';
         this.falls_with_gravity = false;
         this.fall_through = true;
     }
@@ -20,9 +18,7 @@ public class Block {
         this.fall_through = false;
     }
 
-
-
-    public char display(){
+    public char display() {
         return contenuto;
     }
 
@@ -34,7 +30,4 @@ public class Block {
         return fall_through;
     }
 
-    public void setContenuto(char contenuto) {
-        this.contenuto = contenuto;
-    }
 }
