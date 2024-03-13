@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="file://$USER_HOME$/JavaFx/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="file://$USER_HOME$/JavaFx/javafx-21.0.2-javadoc" />
+    </JAVADOC>
+    <NATIVE>
+      <root url="file://$USER_HOME$/JavaFx/lib" />
+    </NATIVE>
+    <SOURCES />
+    <jarDirectory url="file://$USER_HOME$/JavaFx/lib" recursive="false" />
+  </library>
+</component>
