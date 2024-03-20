@@ -1,5 +1,6 @@
 package visual;
 
+import data.block.AirBlock;
 import data.block.Furnace;
 import data.block.SmeltableBlock;
 
@@ -14,9 +15,9 @@ public class MainView {
     }
 
     public void move_into_furnace(int x, int y){
-        if(field.isSmeltable(x,y)){
-            f.setInput(field.getElement(x,y));
-            field.change_cell(x,y);
+        if(field.isSmeltable(x,y)) {
+            f.setInput(field.getElement(x, y));
+            field.insert_at_coords(x, y, new AirBlock());
         }
     }
 

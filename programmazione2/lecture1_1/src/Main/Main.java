@@ -1,6 +1,9 @@
 package Main;
 
+import data.block.Furnace;
+import data.block.GlassBlock;
 import data.block.SandBlock;
+import visual.MainView;
 import visual.Map;
 
 import java.util.Scanner;
@@ -8,12 +11,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Map m = new Map();
-        m.display_on_out();
+        MainView m = new MainView();
 
-        m.insert_at_coords(0,0, new SandBlock());
+        m.display();
 
-        m.display_on_out();
+        m.move_into_furnace(13,0);
+        m.display();
+
+
 
     }
 }

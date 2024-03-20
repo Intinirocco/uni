@@ -15,11 +15,10 @@ public class Map {
     public Map() {
         mappa = new AbstractBlock[x][y];
         Random ran = new Random();
-        AirBlock a = new AirBlock();
         char blocco = '0';
         for (int r = 0; r < x; ++r) {
             for (int c = 0; c < y; ++c) {
-                insert_at_coords(r,c, a);
+                insert_at_coords(r,c, new AirBlock());
             }
         }
         addRiver();
