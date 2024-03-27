@@ -1,29 +1,41 @@
 package visual;
 
-import data.block.AirBlock;
-import data.block.Furnace;
-import data.block.SmeltableBlock;
+import Utils.Coordinates;
+import data.BlockFactory;
+import data.blocks.Block;
+import data.blocks.Furnace;
+import data.blocks.SmeltableBlock;
 
 public class MainView {
-    private Furnace f;
-    private Map field;
+    private final Furnace furnace;
+    private final Map map;
 
+    private BlockFactory blockF;
 
     public MainView() {
-        f = new Furnace();
-        field = new Map();
+        furnace = new Furnace();
+        map = new Map();
     }
 
-    public void move_into_furnace(int x, int y){
-        if(field.isSmeltable(x,y)) {
-            f.setInput(field.getElement(x, y));
-            field.insert_at_coords(x, y, new AirBlock());
+    public void move_into_furnace(int x, int y) {
+        Block block = map.getElement(x, y);
+        if (block instanceof SmeltableBlock) {
+            furnace.setInput((SmeltableBlock) block);
+            map.insert_at_coords(block, x,y);
         }
     }
 
-    public void display(){
-        field.display_on_out();
-        System.out.println("\n///////////////////////////\n");
-        f.display_on_out();
+
+
+    public void smelt(){
+        furnace.smelt();
+    }
+
+    public void display() {
+        furnace.display_on_out();
+        System.out.println("\n//////////////////////////////////////////\n");
+        map.display_on_out();
+
+
     }
 }

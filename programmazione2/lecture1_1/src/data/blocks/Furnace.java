@@ -1,4 +1,4 @@
-package data.block;
+package data.blocks;
 
 public class Furnace{
 

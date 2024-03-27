@@ -1,6 +1,8 @@
-package data.block;
+package data.blocks;
 
-public class WaterBlock extends AbstractBlock{
+import data.blocks.AbstractBlock;
+
+public class WaterBlock extends AbstractBlock {
 
     public WaterBlock() {
         blockname = "Water";
@@ -8,6 +10,5 @@ public class WaterBlock extends AbstractBlock{
         falls_with_gravity = true;
         fall_through = true;
     }
-
 
 }

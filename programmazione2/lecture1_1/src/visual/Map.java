@@ -1,39 +1,47 @@
 package visual;
 
-import data.block.*;
-
+import data.BlockFactory;
+import data.blocks.*;
 import java.util.Random;
+import Utils.Coordinates;
 
 public class Map {
 
-    public final int x = 16;
-    public final int y = 14;
-    public final int RANDOM_BLOCKS_TO_ADD = 12;
+    public final int x = 5;
+    public final int y = 5;
+    public final int RANDOM_BLOCKS_TO_ADD = 2;
 
     private Block[][] mappa;
+    private BlockFactory bF;
 
+    public Map(BlockFactory bF){
+        this();
+    }
     public Map() {
-        mappa = new AbstractBlock[x][y];
-        Random ran = new Random();
-        char blocco = '0';
-        for (int r = 0; r < x; ++r) {
-            for (int c = 0; c < y; ++c) {
-                insert_at_coords(r,c, new AirBlock());
+        this.bF = new BlockFactory();
+
+        mappa = new AbstractBlock[Coordinates.DIMENSION_ROWS][Coordinates.DIMENSION_COLUMNS];
+        for (int i = 0; i < Coordinates.DIMENSION_ROWS; i++) {
+            for (int k = 0; k < Coordinates.DIMENSION_COLUMNS; k++) {
+                Block b = bF.default_block();
+                insert_at_coords(b, i,k);
             }
         }
-        addRiver();
-        randomBlock();
+        this.addSea();
+        this.randomBlock();
     }
 
     public void display_on_out() {
-        System.out.println("---------------------//---------------------");
-        for (int r = 0; r < x; ++r) {
-            for (int c = 0; c < y; ++c) {
-                System.out.print(mappa[r][c].display() + " ");
+        for (int r = 0; r < Coordinates.DIMENSION_ROWS; r++){
+            System.out.print(r);
+            System.out.print("|");
+            for (int c = 0; c < Coordinates.DIMENSION_COLUMNS; c++){
+                System.out.print(mappa[r][c].display());
             }
-            System.out.println("\n");
+            System.out.print("||");
+            System.out.println();
         }
-        System.out.println("---------------------//---------------------");
+
     }
 
     public void change_cell(int x, int y) {
@@ -44,18 +52,19 @@ public class Map {
         }
     }
 
-    public void insert_at_coords(int x, int y, Block b) {
-        if (b != null && x >= 0 && x < this.x && y >= 0 && y < this.y) {
+    public void insert_at_coords(Block b, int x, int y) {
+        if (b != null ) {
             mappa[x][y] = b;
-            gravita(x, y);
+            gravita(x,y);
         } else {
             System.err.println("Errore nelle coordinate o nel blocco inserito!!!");
         }
+
     }
 
     private void gravita(int x, int y) {
         int index = x;
-        while (index < mappa.length - 1 && mappa[index][y].isFalls_with_gravity()) {
+        while (index < Coordinates.DIMENSION_ROWS - 1 && mappa[index][y].isFalls_with_gravity()) {
             if (mappa[index + 1][y].isFall_through()) {
                 swap(index, y);
                 index++;
@@ -72,11 +81,14 @@ public class Map {
     }
 
     private void addRowsOfWater(){
-        Block a = new WaterBlock();
+        Coordinates c;
+        AbstractBlock a = new WaterBlock();
         for(int i = 0; i < mappa[0].length; ++i){
-            insert_at_coords(0,i, a);
+            insert_at_coords(a,0,i);
         }
     }
+
+
 
     public void addSea(){
         for(int i = 0; i < 3; ++i){
@@ -88,13 +100,16 @@ public class Map {
         addRowsOfWater();
     }
 
-    public SmeltableBlock getElement(int x, int y){
-
-        return (SmeltableBlock) mappa[x][y];
+    public Block getElement(int x, int y){
+        return mappa[x][y];
     }
 
     public boolean isSmeltable(int r, int c){
         return mappa[r][c] instanceof SmeltableBlock;
+    }
+
+    public SmeltableBlock getSmeltableBlock(int r, int c){
+        return (SmeltableBlock) mappa[r][c];
     }
 
     private void randomBlock(){
@@ -103,9 +118,8 @@ public class Map {
             Block b = new SandBlock();
             int row = rand.nextInt(this.x);
             int col = rand.nextInt(this.y);
-            insert_at_coords(row, col, b);
+            insert_at_coords(b,row,col);
         }
     }
-
-
 }
+
