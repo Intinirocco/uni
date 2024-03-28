@@ -1,4 +1,4 @@
-package data.blocks;
+package data.interfaces;
 
 public interface IronSwordInterface {
 }

@@ -1,8 +1,8 @@
 package Utils;
 
 public class Coordinates {
-    public static final int DIMENSION_COLUMNS = 9;
-    public static final int DIMENSION_ROWS = 5;
+    public static final int DIMENSION_COLUMNS = 10;
+    public static final int DIMENSION_ROWS = 10;
 
     private int row;
     private int col;

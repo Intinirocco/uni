@@ -1,5 +1,8 @@
 package data.blocks;
 
+import data.interfaces.Block;
+import data.interfaces.SmeltableBlock;
+
 public class Furnace{
 
     private SmeltableBlock input;
@@ -10,7 +13,7 @@ public class Furnace{
         this.output = new NullBlock();
     }
 
-    public SmeltableBlock getInput() {
+    public SmeltableBlock get_input() {
         return input;
     }
 
@@ -20,7 +23,7 @@ public class Furnace{
 
     public void display_on_out(){
         System.out.println("|| "
-                +this.getInput().display()
+                +this.get_input().display()
                 +" --> "
                 +this.getOutput().display()
                 +" ||");
@@ -35,6 +38,8 @@ public class Furnace{
         this.input = input;
         output = input.smelt();
     }
+
+
 
 
 }

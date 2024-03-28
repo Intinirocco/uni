@@ -1,14 +1,14 @@
 package visual;
 
+import Utils.BlockErrorException;
 import data.BlockFactory;
 import data.blocks.*;
 import java.util.Random;
 import Utils.Coordinates;
+import data.interfaces.Block;
+import data.interfaces.SmeltableBlock;
 
 public class Map {
-
-    public final int x = 5;
-    public final int y = 5;
     public final int RANDOM_BLOCKS_TO_ADD = 2;
 
     private Block[][] mappa;
@@ -45,7 +45,7 @@ public class Map {
     }
 
     public void change_cell(int x, int y) {
-        if (x >= 0 && x < this.x && y >= 0 && y < this.y) {
+        if (x >= 0 && x <Coordinates.DIMENSION_ROWS && y >= 0 && y < Coordinates.DIMENSION_COLUMNS) {
             mappa[x][y] = new AirBlock();
         } else {
             System.err.println("Errore nelle coordinate inserite!!!");
@@ -66,8 +66,12 @@ public class Map {
         int index = x;
         while (index < Coordinates.DIMENSION_ROWS - 1 && mappa[index][y].isFalls_with_gravity()) {
             if (mappa[index + 1][y].isFall_through()) {
-                swap(index, y);
-                index++;
+                if((mappa[index][y] instanceof SandBlock) && (mappa[index+1][y] instanceof TorchBlock)){
+                    mappa[index][y] = new AirBlock();
+                }else {
+                    swap(index, y);
+                    index++;
+                }
             } else {
                 break;
             }
@@ -104,7 +108,7 @@ public class Map {
         return mappa[x][y];
     }
 
-    public boolean isSmeltable(int r, int c){
+    private boolean is_smeltable(int r, int c) throws BlockErrorException {
         return mappa[r][c] instanceof SmeltableBlock;
     }
 
@@ -116,10 +120,26 @@ public class Map {
         Random rand = new Random();
         for (int i = 0 ; i < RANDOM_BLOCKS_TO_ADD; i++){
             Block b = new SandBlock();
-            int row = rand.nextInt(this.x);
-            int col = rand.nextInt(this.y);
+            int row = rand.nextInt(Coordinates.DIMENSION_ROWS);
+            int col = rand.nextInt(Coordinates.DIMENSION_COLUMNS);
             insert_at_coords(b,row,col);
         }
     }
+
+    private boolean is_pickable(Coordinates c) throws Exception {
+        if(!c.is_inbound()){
+            int row = c.getRow();
+            int col = c.getCol();
+
+            return mappa[row][col].is_pickable();
+        }else{
+            throw new Exception("Le coordinate inserite non sono valide");
+        }
+    }
+
+    public Block gimme_pickable(Coordinates c)throws BlockErrorException{
+        return mappa[c.getRow()][c.getCol()];
+    }
+
 }
 

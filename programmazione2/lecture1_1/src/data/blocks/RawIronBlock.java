@@ -1,6 +1,9 @@
 package data.blocks;
 
-public class RawIronBlock extends AbstractSolidBlock implements SmeltableBlock{
+import data.interfaces.Block;
+import data.interfaces.SmeltableBlock;
+
+public class RawIronBlock extends AbstractSolidBlock implements SmeltableBlock {
 
 
     @Override

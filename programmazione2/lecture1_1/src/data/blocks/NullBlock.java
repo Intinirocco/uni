@@ -1,9 +1,13 @@
 package data.blocks;
 
-public class NullBlock extends AbstractSolidBlock implements  SmeltableBlock{
+import data.interfaces.Block;
+import data.interfaces.SmeltableBlock;
+
+public class NullBlock extends AbstractSolidBlock implements SmeltableBlock {
 
     public NullBlock() {
         super();
+        pickable = false;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package data.blocks;
 
-import data.blocks.AbstractSolidBlock;
+import data.interfaces.IronSwordInterface;
 
-public class IronSwordBlock extends AbstractSolidBlock implements IronSwordInterface{
+public class IronSwordBlock extends AbstractSolidBlock implements IronSwordInterface {
 
 
 }
