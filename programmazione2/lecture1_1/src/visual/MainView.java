@@ -3,6 +3,7 @@ package visual;
 import Utils.Coordinates;
 import data.BlockFactory;
 import data.Inventory;
+import data.blocks.AirBlock;
 import data.blocks.NullBlock;
 import data.interfaces.Block;
 import data.blocks.Furnace;
@@ -30,6 +31,7 @@ public class MainView {
             if (block instanceof SmeltableBlock) {
                 furnace.setInput((SmeltableBlock) block);
                 map.insert_at_coords(block, x, y);
+                map.drop(x,y);
             }
         }
     }
@@ -65,6 +67,9 @@ public class MainView {
         if(c.is_inbound()){
             if(map.getElement(x,y).is_pickable()){
                 inventario.add_block(map.getElement(x,y));
+                map.insert_at_coords(new AirBlock(),x,y);
+                int z = x;
+                map.drop(x,y);
             }else{
                 System.err.println("L'elemento a quelle coordinate non si può prendere");
             }

@@ -62,7 +62,7 @@ public class Map {
 
     }
 
-    private void gravita(int x, int y) {
+    public void gravita(int x, int y) {
         int index = x;
         while (index < Coordinates.DIMENSION_ROWS - 1 && mappa[index][y].isFalls_with_gravity()) {
             if (mappa[index + 1][y].isFall_through()) {
@@ -76,6 +76,13 @@ public class Map {
                 break;
             }
         }
+    }
+
+    public void drop(int x, int y){
+        for(int i = x; i > 0; --i){
+            gravita(x,y);
+        }
+
     }
 
     private void swap(int x, int y) {

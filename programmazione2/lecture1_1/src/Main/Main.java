@@ -41,7 +41,7 @@ public class Main {
             m.display();
         }
 
-        /*m.display();
+        m.display();
         for(int i = 0; i < INTERACTION; ++i){
             System.out.print("Enter row and then column, or enter '9' and then '9' for smelting: ");
             int row = in.nextInt();
@@ -52,7 +52,7 @@ public class Main {
                 m.move_into_furnace(row, col);
             }
             m.display();
-        }*/
+        }
 
     }
 }
