@@ -13,15 +13,22 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         
-        List <Integer> lista = new ArrayList<>();
+        /*Dichiarazione della lista*/
+        List <Integer> lista;
+        /*Istanziazione della lista*/
+        lista  = new ArrayList<>();
         int nElem = 10;
         
+        /*Inserisco 10 elementi*/
         for(int i = 0; i < nElem; ++i){
             lista.add(i+1);
         }
         
         System.out.println("Stampa dell'ArrayList:");
         
+        /*Stampo gli elementi della lista
+        sintassi del foreach --> per ogni Integer presente nella lista fai: 
+        blocco di codice dentro le parentesi graffe*/
         for(Integer i : lista){
             System.out.println(i);
         }
@@ -45,7 +52,9 @@ public class Main {
         for(Integer i : lista){
             System.out.println(i);
         }
-        
+        /*Attenzione se avete una lista di integer a usare il metodo remove
+        il primo ha un oggetto della classe Object passato come parametro
+        Il secondo un intero, che sarebbe l'indice. */
         lista.remove(Integer.valueOf(7));
         lista.remove(0);
         
@@ -77,16 +86,20 @@ public class Main {
         
         System.out.println("Indice dell'ultimo 6 della lista: " +lista.lastIndexOf(6));
             
+        /*Ritorna una lista con gli elementi della prima ma in ordine inverso*/
         List<Integer> listaContrario = lista.reversed();
         System.out.println("\n------------------------------\n");
         
         listaContrario.forEach(System.out::println);
+        
+        /*Rimuove tutti gli elementi dalla lista*/
         
         lista.clear();
         
         System.out.println("\n------------------------------\n");
         
         lista.forEach(System.out::println);
+        
         
     }
 }
